@@ -57,3 +57,40 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Render Deployment (Docker Runtime)
+
+This repository is ready for Render deployment using `RENDER_RUNTIME=docker`.
+
+### Required environment variables
+
+Set these in your Render service:
+
+- `APP_NAME`
+- `APP_ENV=production`
+- `APP_DEBUG=false`
+- `APP_KEY` (generate locally: `php artisan key:generate --show`)
+- `APP_URL` (Render URL or custom domain)
+- `DB_CONNECTION`
+- `DB_HOST`
+- `DB_PORT`
+- `DB_DATABASE`
+- `DB_USERNAME`
+- `DB_PASSWORD`
+- any app-specific keys (`MAIL_*`, `REDIS_*`, etc.)
+
+### Migration strategy
+
+Recommended: run migrations as a separate one-time command/job after deploy:
+
+`php artisan migrate --force`
+
+Avoid running migrations in the startup command for every container restart.
+
+### Branch deployment readiness
+
+For branch deploys (e.g. `staging`, `main`), each branch must include:
+
+- root `Dockerfile`
+- root `.dockerignore`
+- Render-compatible configuration via environment variables
