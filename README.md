@@ -87,7 +87,7 @@ Recommended: run migrations as a separate one-time command/job after deploy:
 
 Avoid running migrations in the startup command for every container restart.
 
-### Branch deployment readiness
+### Branch deployment readinesssddds
 
 For branch deploys (e.g. `staging`, `main`), each branch must include:
 
